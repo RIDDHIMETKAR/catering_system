@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utsav Catering | Premium Indian Catering Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700&family=Rozha+One&family=Yatra+One&display=swap"
+        rel="stylesheet">
+  
+ <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <h1 class="logo">RasoiCater</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#vendors">Caterers</a></li>
+                <li><a href="#menus">Menus</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#" class="btn-primary" onclick="openModal('bookingModal')">Book Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+      <div class="hero-content" style="background-image: url('{% static 'core/images/image.png' %}')">
+            <span class="badge">Premium Catering Platform</span>
+            <h2>Celebrate with Authentic <br>Indian Flavors</h2>
+            <p>From grand weddings to intimate gatherings, find the perfect caterer for your special moments.</p>
+            <div class="hero-btns">
+                <button class="btn-primary" onclick="openModal('bookingModal')">Book a Caterer</button>
+                <button class="btn-secondary" onclick="document.getElementById('vendors').scrollIntoView()">Explore
+                    Vendors</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <h2 class="section-title">Our <span>Services</span></h2>
+        <div class="services-grid container">
+            <div class="service-card glass">
+                <i class="fas fa-ring fa-3x"></i>
+                <h3>Wedding feasts</h3>
+                <p>Lavish multi-course meals including traditional sweets, chaat counters, and regional specialties.</p>
+            </div>
+            <div class="service-card glass">
+                <i class="fas fa-briefcase fa-3x"></i>
+                <h3>Corporate Events</h3>
+                <p>Professional catering for seminars and office parties with premium thalis and buffet spreads.</p>
+            </div>
+            <div class="service-card glass">
+                <i class="fas fa-birthday-cake fa-3x"></i>
+                <h3>Private Gatherings</h3>
+                <p>Customized menus for housewarming (griha pravesh), birthdays, and intimate celebrations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters & Vendors Section -->
+    <section id="vendors" class="section bg-light">
+        <h2 class="section-title">Featured <span>Caterers</span></h2>
+
+        <div class="container filter-container glass">
+            <div class="filter-group">
+                <label><i class="fas fa-map-marker-alt"></i> City</label>
+                <select id="filter-location">
+                    <option value="all">All Locations</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-rupee-sign"></i> Price per Plate</label>
+                <select id="filter-price">
+                    <option value="all">Any Price</option>
+                    <option value="budget">Below ₹1000</option>
+                    <option value="premium">₹1000 - ₹2000</option>
+                    <option value="luxury">Above ₹2000</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-star"></i> Rating</label>
+                <select id="filter-rating">
+                    <option value="all">Any Rating</option>
+                    <option value="4+">4.0 & Above</option>
+                    <option value="4.5+">4.5 & Above</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container vendors-grid">
+    {% for vendor in vendors %}
+    <div class="vendor-card glass">
+    <div class="vendor-img" style="background-image: url('{{ vendor.image.url }}');"></div>
+    <div class="vendor-content">
+        <h3>{{ vendor.business_name }}</h3>
+<button class="btn-primary" onclick="openBookingModal({{ vendor.id }})">Book Now</button>    </div>
+</div>
+    {% endfor %}
+</div>
+    </section>
+
+    <!-- Menu Previews -->
+    <section id="menus" class="section">
+        <h2 class="section-title">Popular <span>Menus</span></h2>
+        <div class="container menu-grid">
+            <div class="menu-card glass">
+                <div class="menu-img"
+                    style="background-image: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80');">
+                </div>
+                <div class="menu-info">
+                    <h3>The Royal Maharaja Thali</h3>
+                    <p class="cuisine">North Indian • Rajasthani</p>
+                    <p class="desc">Includes Paneer Makhani, Dal Baati Churma, Gulab Jamun, and various breads.</p>
+                    <p class="price">From ₹1200 / plate</p>
+                </div>
+            </div>
+            <div class="menu-card glass">
+                <div class="menu-img"
+                    style="background-image: url('file:///c:/Users/Prabha%27s%20PC/Downloads/pexels-saveurssecretes-9619560.jpg');">
+                </div>
+                <div class="menu-info">
+                    <h3>Authentic South Indian Leaf</h3>
+                    <p class="cuisine">South Indian • Traditional</p>
+                    <p class="desc">Served on a banana leaf: Avial, Sambar, Rasam, Payasam, and more delicacies.</p>
+                    <p class="price">From ₹800 / plate</p>
+                </div>
+            </div>
+            <div class="menu-card glass">
+                <div class="menu-img"
+                    style="background-image: url('https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80');">
+                </div>
+                <div class="menu-info">
+                    <h3>The Nawabi Feast</h3>
+                    <p class="cuisine">Mughlai • Awadhi</p>
+                    <p class="desc">Rich Biryanis, succulent Kebabs, Shahi Tukda, and flavorful Salans.</p>
+                    <p class="price">From ₹1500 / plate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin & Registration CTA -->
+    <section class="section register-cta">
+        <div class="container glass cta-box">
+            <div class="cta-text">
+                <h2>Are you a Catering Professional?</h2>
+                <p>Join our platform to reach thousands of customers looking for authentic Indian catering.</p>
+            </div>
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="openModal('vendorModal')">Register as Vendor</button>
+                <button class="btn-outline" onclick="openModal('adminModal')">Admin Dashboard Preview</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>Utsav Catering</h3>
+                <p>Bringing authentic Indian flavors and premium services to your celebrations.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#vendors">Caterers</a></li>
+                    <li><a href="#menus">Menus</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> namaste@utsavcatering.in</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Utsav Catering. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+            <h2>Book a Caterer</h2>
+          <form method="POST" action="{% url 'book' %}">
+    {% csrf_token %}
+    <input type="hidden" name="vendor_id" value="{{ vendor.id }}">
+    <input type="text" name="name" required>
+    <input type="tel" name="phone" required>
+    <input type="date" name="event_date" required>
+    <select name="event_type" required>
+        <option value="wedding">Wedding</option>
+        <option value="corporate">Corporate</option>
+        <option value="party">Private Party</option>
+    </select>
+    <input type="number" name="guests" required>
+    <button type="submit">Submit</button>
+</form>
+        </div>
+    </div>
+
+    <!-- Admin/Vendor Alert Modals -->
+    <div id="vendorModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close" onclick="closeModal('vendorModal')">&times;</span>
+            <h2>Vendor Registration</h2>
+            <p>Vendor registration portal is currently under maintenance. Please check back later or contact support.
+            </p>
+        </div>
+    </div>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close" onclick="closeModal('adminModal')">&times;</span>
+            <h2>Admin Login Preview</h2>
+            <form onsubmit="event.preventDefault(); alert('Demo mode: Login bypassed.'); closeModal('adminModal');">
+                <input type="text" placeholder="Admin Username" required
+                    style="margin-bottom: 20px; width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff;">
+                <input type="password" placeholder="Password" required
+                    style="margin-bottom: 20px; width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff;">
+                <button type="submit" class="btn-primary" style="width: 100%;">Login Preview</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
